@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        station2卡顿 - zddzdd
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+		<img src="/img/wanwan.jpg" class="js-avatar show"/>
+	</div>
+        <div class="name">
+            <i>Xayahion</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E9%97%AE%E9%A2%98%E8%83%8C%E6%99%AF"><span class="toc-text">1.问题背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%88%86%E6%9E%90%E8%BF%87%E7%A8%8B"><span class="toc-text">2.分析过程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-trace%E4%BF%A1%E6%81%AF"><span class="toc-text">2.1 trace信息</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B%E6%A2%B3%E7%90%86"><span class="toc-text">流程梳理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E5%B8%B8vs%E5%BC%82%E5%B8%B8%E6%97%A5%E5%BF%97%E5%AF%B9%E6%AF%94"><span class="toc-text">正常vs异常日志对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E4%BD%BF%E8%83%BDdrm%E6%97%A5%E5%BF%97"><span class="toc-text">2.2 使能drm日志</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-wait-timeout%E7%AD%89%E5%BE%85%E6%97%B6%E5%AD%98%E5%9C%A8-sde-fence-trigger"><span class="toc-text">2.2.1 wait_timeout等待时存在_sde_fence_trigger</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2-%E5%BC%82%E5%B8%B8%E6%97%A5%E5%BF%97%E4%B8%AD%E5%AD%98%E5%9C%A8DRM-IOCTL-WAIT-VBLANK"><span class="toc-text">2.2.2 异常日志中存在DRM_IOCTL_WAIT_VBLANK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-3-drm-vblank"><span class="toc-text">2.2.3 drm_vblank</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%86%85%E6%A0%B8%E6%80%81"><span class="toc-text">1.内核态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E7%94%A8%E6%88%B7%E6%80%81"><span class="toc-text">2.用户态</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-DisplayBase-PerformHwCommit-%E8%80%97%E6%97%B6%E9%95%BF%E8%BE%BE1s"><span class="toc-text">2.3 DisplayBase::PerformHwCommit::耗时长达1s</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-HWC%E6%A1%86%E6%9E%B6%E3%80%90CS%E6%9E%B6%E6%9E%84%E3%80%91"><span class="toc-text">1.HWC框架【CS架构】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8"><span class="toc-text">2.函数调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Wait%E5%85%A5%E5%8F%82"><span class="toc-text">3.Wait入参</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">3.解决方案</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E5%BB%B6%E4%BC%B8%E5%AD%A6%E4%B9%A0"><span class="toc-text">4.延伸学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-Vsync"><span class="toc-text">4.1 Vsync</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Vsync%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-text">1.Vsync虚拟化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Vsync%E5%90%8C%E6%AD%A5"><span class="toc-text">2.Vsync同步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Vsync%E5%88%86%E9%85%8D"><span class="toc-text">3.Vsync分配</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-Qcom-display"><span class="toc-text">4.2 Qcom display</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9B%BE%E6%98%BE%E7%B3%BB%E7%BB%9F%E6%A1%86%E6%9E%B6%E5%9B%BE"><span class="toc-text">1.图显系统框架图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-KMS%E6%B5%81%E7%A8%8B"><span class="toc-text">2.KMS流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-SurfaceFlinger%E4%BC%A0%E5%85%A5HWC%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="toc-text">3.SurfaceFlinger传入HWC的过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-fence%E6%9C%BA%E5%88%B6"><span class="toc-text">4.fence机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-PLANE"><span class="toc-text">5.PLANE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-CRTC"><span class="toc-text">6.CRTC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-ENCODER"><span class="toc-text">7.ENCODER</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-CONNECTOR"><span class="toc-text">8.CONNECTOR</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E7%96%91%E9%97%AE%E7%82%B9"><span class="toc-text">5.疑问点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#pending-kickoff-cnt"><span class="toc-text">pending_kickoff_cnt</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-text">6.参考链接</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        station2卡顿
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2024-03-27 15:12:51</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#problem" title="problem">problem</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h1 id="1-问题背景"><a href="#1-问题背景" class="headerlink" title="1.问题背景"></a>1.问题背景</h1><p>station2设备滑动屏幕感到明显卡顿</p>
+<h1 id="2-分析过程"><a href="#2-分析过程" class="headerlink" title="2.分析过程"></a>2.分析过程</h1><h2 id="2-1-trace信息"><a href="#2-1-trace信息" class="headerlink" title="2.1 trace信息"></a>2.1 trace信息</h2><p>adb登录到板端，进入sdcard目录，然后运行：</p>
+<p>atrace -b 19200 -o .&#x2F;sdcard&#x2F;mytrace gfx input view webview wm am sm hal res dalvik rs ss sched freq power camera -t 20<br>adb pull将mytrace传到本地，<br>使用systrace.py转换成html格式</p>
+<p>.&#x2F;systrace.py –from-file mytrace</p>
+<p><img src="D:\DingTalkAppData\DingTalk\216604157_v2\resource_cache\c7\c7cbc29b0aad4d04e5fbc26d1c2612bb.png" alt="c7cbc29b0aad4d04e5fbc26d1c2612bb"></p>
+<h3 id="流程梳理"><a href="#流程梳理" class="headerlink" title="流程梳理"></a>流程梳理</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ops-&gt;wait_for_commit_done</span><br><span class="line">	sde_encoder_phys_wb_wait_for_commit_done</span><br><span class="line">		_sde_encoder_phys_wb_wait_for_idle</span><br><span class="line">			wait_info.wq = &amp;phys_enc-&gt;pending_kickoff_wq; <span class="comment">//Wait queue for blocking until kickoff completes</span></span><br><span class="line">			_sde_encoder_wait_timeout</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="正常vs异常日志对比"><a href="#正常vs异常日志对比" class="headerlink" title="正常vs异常日志对比"></a>正常vs异常日志对比</h3><p>1.正常日志</p>
+<p><img src="C:\Users\rokid\AppData\Roaming\Typora\typora-user-images\image-20240326111508593.png" alt="image-20240326111508593"></p>
+<p>2.异常日志</p>
+<p>异常打印：</p>
+<p><img src="https://static.dingtalk.com/media/lQLPJwWXZJoQWFnMrs0D6bA0C31KiBlddwXoUCA_X7gA_1001_174.png" alt="img"></p>
+<p><img src="C:\Users\rokid\AppData\Roaming\Typora\typora-user-images\image-20240320164642418.png" alt="image-20240320164642418"></p>
+<h2 id="2-2-使能drm日志"><a href="#2-2-使能drm日志" class="headerlink" title="2.2 使能drm日志"></a>2.2 使能drm日志</h2><p><img src="C:\Users\rokid\AppData\Roaming\Typora\typora-user-images\image-20240319215059045.png" alt="image-20240319215059045"></p>
+<p>echo 0x1ff &gt; &#x2F;sys&#x2F;module&#x2F;drm&#x2F;parameters&#x2F;debug</p>
+<h3 id="2-2-1-wait-timeout等待时存在-sde-fence-trigger"><a href="#2-2-1-wait-timeout等待时存在-sde-fence-trigger" class="headerlink" title="2.2.1 wait_timeout等待时存在_sde_fence_trigger"></a>2.2.1 wait_timeout等待时存在_sde_fence_trigger</h3><p><img src="C:\Users\rokid\AppData\Roaming\Typora\typora-user-images\image-20240320165437477.png" alt="image-20240320165437477"></p>
+<h3 id="2-2-2-异常日志中存在DRM-IOCTL-WAIT-VBLANK"><a href="#2-2-2-异常日志中存在DRM-IOCTL-WAIT-VBLANK" class="headerlink" title="2.2.2 异常日志中存在DRM_IOCTL_WAIT_VBLANK"></a>2.2.2 异常日志中存在DRM_IOCTL_WAIT_VBLANK</h3><p><img src="C:\Users\rokid\AppData\Roaming\Typora\typora-user-images\image-20240320182713784.png" alt="image-20240320182713784"></p>
+<p>正常日志：</p>
+<p><img src="C:\Users\rokid\AppData\Roaming\Typora\typora-user-images\image-20240320182728940.png" alt="image-20240320182728940"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sde_crtc_get_vblank_counter</span><br><span class="line">drm_update_vblank_count</span><br><span class="line">sde_crtc_vblank_cb</span><br><span class="line">drm_wait_vblank_ioctl</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-2-3-drm-vblank"><a href="#2-2-3-drm-vblank" class="headerlink" title="2.2.3 drm_vblank"></a>2.2.3 drm_vblank</h3><p>drm用vblank来抽象vsync，vsync是display模块产生的，正常情况下开启后会按照一定时间触发中断。</p>
+<p>drm driver中会注册vsync的中断服务程序，便于软件进行处理异常，包括vsync。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#la_vendor/kernel_platform/msm-kernel/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c</span><br><span class="line"><span class="type">void</span> <span class="title function_">dpu_crtc_vblank_callback</span><span class="params">(<span class="keyword">struct</span> drm_crtc *crtc)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">dpu_crtc</span> *<span class="title">dpu_crtc</span> =</span> to_dpu_crtc(crtc);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* keep statistics on vblank callback - with auto reset via debugfs */</span></span><br><span class="line">        <span class="keyword">if</span> (ktime_compare(dpu_crtc-&gt;vblank_cb_time, ktime_set(<span class="number">0</span>, <span class="number">0</span>)) == <span class="number">0</span>)</span><br><span class="line">                dpu_crtc-&gt;vblank_cb_time = ktime_get();</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">                dpu_crtc-&gt;vblank_cb_count++;</span><br><span class="line">        drm_crtc_handle_vblank(crtc);</span><br><span class="line">        trace_dpu_crtc_vblank_cb(DRMID(crtc));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/direct/89fa7adc5b2d42f9858d234892151bd6.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">dp_display_request_irq</span><br><span class="line">	devm_request_irq(dp_display-&gt;drm_dev-&gt;dev, dp-&gt;irq,</span><br><span class="line">                     dp_display_irq_handler,</span><br><span class="line">                     IRQF_TRIGGER_HIGH, &quot;dp_display_isr&quot;, dp);</span><br><span class="line">		 </span><br><span class="line">irq-&gt;name = &quot;vsync_irq&quot;;</span><br><span class="line">irq-&gt;cb.func = dpu_encoder_phys_vid_underrun_irq;</span><br><span class="line">dpu_encoder_phys_vid_vblank_irq</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">static const struct dpu_encoder_virt_ops dpu_encoder_parent_ops = &#123;</span><br><span class="line">        .handle_vblank_virt = dpu_encoder_vblank_callback,</span><br><span class="line">        .handle_underrun_virt = dpu_encoder_underrun_callback,</span><br><span class="line">        .handle_frame_done = dpu_encoder_frame_done_callback,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">dpu_encoder_vblank_callback</span><br><span class="line">    dpu_crtc_vblank_callback</span><br><span class="line">		drm_crtc_handle_vblank</span><br><span class="line">		</span><br><span class="line">drm_crtc_handle_vblank</span><br><span class="line">	drm_handle_vblank</span><br><span class="line">		drm_update_vblank_count(dev, pipe, true);</span><br></pre></td></tr></table></figure>
+
+<p>看到store_vblank里会把vblank-&gt;count+1; 然后会唤醒等待队列。</p>
+<p>中断里把vblank count+1；中断是display模块产生的，如果刷新率为60帧，每16.6ms就会来一个中断，这个操作与user space无关。</p>
+<p>drm_wait_vblank_ioctl等到vblank count之后就会唤醒进程，并返回给user。</p>
+<p><img src="https://img-blog.csdnimg.cn/direct/dfd6d08eba3a428d92f01be7861d8015.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line">[  192.136009] [drm:_sde_encoder_wait_timeout:369] [sde error]zyr wait_event_timeout1 info-&gt;atomic_cnt:0, info-&gt;count_check:0</span><br><span class="line">[  192.136222] [drm:sde_encoder_phys_vid_vblank_irq:536] [sde error]zyr sde_encoder_phys_vid_vblank_irq1 pending_retire_fence_cnt:0</span><br><span class="line">[  192.136229] [drm:sde_encoder_phys_vid_vblank_irq:543] [sde error]zyr sde_encoder_phys_vid_vblank_irq2 pending_retire_fence_cnt:0</span><br><span class="line">1.第一次drm_handle_vblank</span><br><span class="line">drm_update_vblank_count</span><br><span class="line">	__get_vblank_counter</span><br><span class="line">		crtc-&gt;funcs-&gt;get_vblank_counter</span><br><span class="line">			sde_crtc_get_vblank_counter</span><br><span class="line">[  192.136892] [drm:sde_crtc_get_vblank_counter [msm_drm]] crtc:115 enc:56 is_built_in:1 vblank_cnt:1397</span><br><span class="line">[  192.137526] [drm:sde_crtc_get_vblank_counter [msm_drm]] crtc:115 enc:56 is_built_in:1 vblank_cnt:1397</span><br><span class="line">[  192.137543] msm_drm ae00000.qcom,mdss_mdp: [drm:drm_update_vblank_count] updating vblank count on crtc 0: current=1397, diff=1, hw=1397 hw_last=1396</span><br><span class="line">drm_handle_vblank_events</span><br><span class="line">[  192.137557] msm_drm ae00000.qcom,mdss_mdp: [drm:drm_handle_vblank_events] vblank event on 1398, current 1398</span><br><span class="line">vblank_disable_fn</span><br><span class="line">[  192.137565] msm_drm ae00000.qcom,mdss_mdp: [drm:drm_vblank_put] disabling vblank on crtc 0</span><br><span class="line">vblank_disable_fn</span><br><span class="line">	drm_vblank_disable_and_save</span><br><span class="line">		drm_update_vblank_count</span><br><span class="line">[  192.138190] [drm:sde_crtc_get_vblank_counter [msm_drm]] crtc:115 enc:56 is_built_in:1 vblank_cnt:1397</span><br><span class="line">[  192.138817] [drm:sde_crtc_get_vblank_counter [msm_drm]] crtc:115 enc:56 is_built_in:1 vblank_cnt:1397</span><br><span class="line">[  192.138831] msm_drm ae00000.qcom,mdss_mdp: [drm:drm_update_vblank_count] updating vblank count on crtc 0: current=1398, diff=0, hw=1397 hw_last=1397</span><br><span class="line">		__disable_vblank</span><br><span class="line">			crtc-&gt;funcs-&gt;disable_vblank</span><br><span class="line">				sde_crtc_disable_vblank</span><br><span class="line">[  192.139459] [drm:sde_crtc_disable_vblank [msm_drm]] dev=ffffff8049651000, crtc=0</span><br><span class="line">					vblank_ctrl_queue_work</span><br><span class="line">						vblank_ctrl_worker</span><br><span class="line">							sde_crtc_vblank</span><br><span class="line">								_sde_crtc_vblank_enable</span><br><span class="line">									sde_encoder_register_vblank_callback</span><br><span class="line">										sde_crtc_vblank_cb</span><br><span class="line">[  192.140176] [drm:sde_crtc_vblank_cb [msm_drm]] crtc115, ts:192119469</span><br><span class="line">[  192.140814] [drm:sde_encoder_register_vblank_callback [msm_drm]] enc56 </span><br><span class="line">									sde_encoder_register_vblank_callback</span><br><span class="line">										sde_encoder_phys_vid_control_vblank_irq</span><br><span class="line">[  192.142159] [drm:sde_encoder_phys_vid_control_vblank_irq [msm_drm]] enc56 intf1 [sde_encoder_register_vblank_callback+0x13c/0x210 [msm_drm]] enable=0/2</span><br><span class="line"></span><br><span class="line">2.DRM_IOCTL_WAIT_VBLANK SDM_EventThread调用</span><br><span class="line"></span><br><span class="line">[  443.228239] CPU: 2 PID: 1201 Comm: SDM_EventThread Tainted: G        W  O      5.10.198-qki-consolidate-android12-9-g436c7dd2d5cf-dirty #1</span><br><span class="line">[  443.228272] Hardware name: Qualcomm Technologies, Inc. Parrot WCN6750 QRD (DT)</span><br><span class="line">[  443.228299] Call trace:</span><br><span class="line">[  443.229730] dump_backtrace.cfi_jt+0x0/0x8</span><br><span class="line">[  443.229749] show_stack+0x1c/0x2c</span><br><span class="line">[  443.229768] dump_stack_lvl+0xf0/0x164</span><br><span class="line">[  443.229780] dump_stack+0x1c/0x2c</span><br><span class="line">[  443.231180] sde_crtc_enable_vblank+0x4c/0xe8 [msm_drm]</span><br><span class="line">[  443.231220] drm_vblank_enable+0xb8/0x220</span><br><span class="line">[  443.231235] drm_vblank_get+0x80/0x16c</span><br><span class="line">[  443.231250] drm_wait_vblank_ioctl+0x15c/0x738</span><br><span class="line">[  443.232686] drm_ioctl_kernel+0x100/0x1d4</span><br><span class="line">[  443.232699] drm_ioctl+0x228/0x34c</span><br><span class="line">[  443.232718] __arm64_sys_ioctl+0xa8/0x110</span><br><span class="line">[  443.232736] el0_svc_common.llvm.4263132210126967612+0xd8/0x20c</span><br><span class="line">[  443.232748] do_el0_svc+0x28/0x98</span><br><span class="line">[  443.232765] el0_svc+0x24/0x38</span><br><span class="line">[  443.232777] el0_sync_handler+0x88/0xec</span><br><span class="line">[  443.232793] el0_sync+0x1b8/0x1c0</span><br><span class="line"></span><br><span class="line">[  192.142406] [drm:drm_ioctl] comm=&quot;SDM_EventThread&quot; pid=1222, dev=0xe200, auth=1, DRM_IOCTL_WAIT_VBLANK</span><br><span class="line">DRM_IOCTL_DEF(DRM_IOCTL_WAIT_VBLANK, drm_wait_vblank_ioctl, DRM_UNLOCKED) //la_vendor/kernel_platform/msm-kernel/drivers/gpu/drm/drm_ioctl.c</span><br><span class="line">	drm_wait_vblank_ioctl</span><br><span class="line">		drm_vblank_get</span><br><span class="line">			drm_vblank_enable</span><br><span class="line">				__enable_vblank</span><br><span class="line">					crtc-&gt;funcs-&gt;enable_vblank</span><br><span class="line">						sde_crtc_enable_vblank</span><br><span class="line">[  192.143057] [drm:sde_crtc_enable_vblank [msm_drm]] dev=ffffff8049651000, crtc=0</span><br><span class="line">[  192.143126] msm_drm ae00000.qcom,mdss_mdp: [drm:drm_vblank_enable] enabling vblank on crtc 0, ret: 0</span><br><span class="line">				drm_update_vblank_count</span><br><span class="line">					sde_crtc_get_vblank_counter</span><br><span class="line">[  192.143764] [drm:sde_crtc_get_vblank_counter [msm_drm]] crtc:115 enc:56 is_built_in:1 vblank_cnt:1397</span><br><span class="line">[  192.143945] [drm:sde_encoder_register_vblank_callback [msm_drm]] enc56 </span><br><span class="line">[  192.144570] [drm:sde_crtc_get_vblank_counter [msm_drm]] crtc:115 enc:56 is_built_in:1 vblank_cnt:1397</span><br><span class="line">[  192.144915] [drm:sde_encoder_phys_vid_control_vblank_irq [msm_drm]] enc56 intf1 [sde_encoder_register_vblank_callback+0x13c/0x210 [msm_drm]] enable=1/1</span><br><span class="line">[  192.144924] msm_drm ae00000.qcom,mdss_mdp: [drm:drm_update_vblank_count] updating vblank count on crtc 0: current=1398, diff=0, hw=1397 hw_last=1397</span><br><span class="line">[  192.145073] msm_drm ae00000.qcom,mdss_mdp: [drm:drm_wait_vblank_ioctl] event on vblank count 1399, current 1398, crtc 0</span><br><span class="line">[  192.148365] [drm:drm_mode_object_get] OBJ ID: 57 (6)</span><br><span class="line">[  192.148383] [drm:drm_atomic_get_connector_state] Added [CONNECTOR:57:DSI-1] ffffff87c4eea000 state to ffffff87f4783600</span><br><span class="line">[  192.148410] [drm:drm_mode_object_get] OBJ ID: 172 (3)</span><br><span class="line">[  192.148423] [drm:drm_atomic_get_crtc_state] Added [CRTC:115:crtc-0] ffffff80495a8000 state to ffffff87f4783600</span><br><span class="line">[  192.149174] [drm:msm_property_atomic_set [msm_drm]] RETIRE_FENCE_OFFSET - 1</span><br><span class="line">[  192.152909] [drm:sde_encoder_phys_vid_vblank_irq:536] [sde error]zyr sde_encoder_phys_vid_vblank_irq1 pending_retire_fence_cnt:0</span><br><span class="line">[  192.152919] [drm:sde_encoder_phys_vid_vblank_irq:543] [sde error]zyr sde_encoder_phys_vid_vblank_irq2 pending_retire_fence_cnt:0</span><br><span class="line">[  192.153611] [drm:sde_crtc_get_vblank_counter [msm_drm]] crtc:115 enc:56 is_built_in:1 vblank_cnt:1398</span><br><span class="line">[  192.154246] [drm:sde_crtc_get_vblank_counter [msm_drm]] crtc:115 enc:56 is_built_in:1 vblank_cnt:1398</span><br><span class="line">[  192.154266] msm_drm ae00000.qcom,mdss_mdp: [drm:drm_update_vblank_count] updating vblank count on crtc 0: current=1398, diff=1, hw=1398 hw_last=1397</span><br><span class="line">[  192.154279] msm_drm ae00000.qcom,mdss_mdp: [drm:drm_handle_vblank_events] vblank event on 1399, current 1399</span><br><span class="line">[  192.154288] msm_drm ae00000.qcom,mdss_mdp: [drm:drm_vblank_put] disabling vblank on crtc 0</span><br><span class="line">[  192.154922] [drm:sde_crtc_get_vblank_counter [msm_drm]] crtc:115 enc:56 is_built_in:1 vblank_cnt:1398</span><br><span class="line">[  192.155554] [drm:sde_crtc_get_vblank_counter [msm_drm]] crtc:115 enc:56 is_built_in:1 vblank_cnt:1398</span><br><span class="line">[  192.155572] msm_drm ae00000.qcom,mdss_mdp: [drm:drm_update_vblank_count] updating vblank count on crtc 0: current=1399, diff=0, hw=1398 hw_last=1398</span><br><span class="line">[  192.156208] [drm:sde_crtc_disable_vblank [msm_drm]] dev=ffffff8049651000, crtc=0</span><br><span class="line">[  192.156924] [drm:sde_crtc_vblank_cb [msm_drm]] crtc115, ts:192136153</span><br><span class="line">[  192.157566] [drm:sde_encoder_register_vblank_callback [msm_drm]] enc56 </span><br><span class="line">[  192.158975] [drm:sde_encoder_phys_vid_control_vblank_irq [msm_drm]] enc56 intf1 [sde_encoder_register_vblank_callback+0x13c/0x210 [msm_drm]] enable=0/2</span><br><span class="line"></span><br><span class="line">[  192.159147] [drm:drm_ioctl] comm=&quot;SDM_EventThread&quot; pid=1222, dev=0xe200, auth=1, DRM_IOCTL_WAIT_VBLANK</span><br><span class="line">[  192.159794] [drm:sde_crtc_enable_vblank [msm_drm]] dev=ffffff8049651000, crtc=0</span><br><span class="line">[  192.159874] msm_drm ae00000.qcom,mdss_mdp: [drm:drm_vblank_enable] enabling vblank on crtc 0, ret: 0</span><br><span class="line">[  192.160514] [drm:sde_crtc_get_vblank_counter [msm_drm]] crtc:115 enc:56 is_built_in:1 vblank_cnt:1398</span><br><span class="line">[  192.161157] [drm:sde_crtc_get_vblank_counter [msm_drm]] crtc:115 enc:56 is_built_in:1 vblank_cnt:1398</span><br><span class="line">[  192.161342] [drm:sde_encoder_register_vblank_callback [msm_drm]] enc56 </span><br><span class="line">[  192.161353] msm_drm ae00000.qcom,mdss_mdp: [drm:drm_update_vblank_count] updating vblank count on crtc 0: current=1399, diff=0, hw=1398 hw_last=1398</span><br><span class="line">[  192.161747] [drm:sde_encoder_phys_vid_control_vblank_irq [msm_drm]] enc56 intf1 [sde_encoder_register_vblank_callback+0x13c/0x210 [msm_drm]] enable=1/1</span><br><span class="line">[  192.161760] [drm:_sde_encoder_wait_timeout:373] [sde error]zyr wait_event_timeout2 info-&gt;atomic_cnt:0, info-&gt;count_check:0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="C:\Users\rokid\AppData\Roaming\Typora\typora-user-images\image-20240321161154281.png" alt="image-20240321161154281"></p>
+<p><img src="https://static.dingtalk.com/media/lQLPJx6RI95fnPXNA3nNBYKwI_0gmcX9SfQF6YlcuEm2AQ_1410_889.png" alt="img"></p>
+<p><img src="https://static.dingtalk.com/media/lQLPKHTo9YWTLPXNAtvNBuqwk1yOyzWEbAEF6YlcuEm2AA_1770_731.png" alt="img"></p>
+<h4 id="1-内核态"><a href="#1-内核态" class="headerlink" title="1.内核态"></a>1.内核态</h4><blockquote>
+<p>[  443.228239] CPU: 2 PID: 1201 Comm: SDM_EventThread Tainted: G        W  O      5.10.198-qki-consolidate-android12-9-g436c7dd2d5cf-dirty #1<br>[  443.228272] Hardware name: Qualcomm Technologies, Inc. Parrot WCN6750 QRD (DT)<br>[  443.228299] Call trace:<br>[  443.229730] dump_backtrace.cfi_jt+0x0&#x2F;0x8<br>[  443.229749] show_stack+0x1c&#x2F;0x2c<br>[  443.229768] dump_stack_lvl+0xf0&#x2F;0x164<br>[  443.229780] dump_stack+0x1c&#x2F;0x2c<br>[  443.231180] sde_crtc_enable_vblank+0x4c&#x2F;0xe8 [msm_drm]<br>[  443.231220] drm_vblank_enable+0xb8&#x2F;0x220<br>[  443.231235] drm_vblank_get+0x80&#x2F;0x16c<br>[  443.231250] drm_wait_vblank_ioctl+0x15c&#x2F;0x738<br>[  443.232686] drm_ioctl_kernel+0x100&#x2F;0x1d4<br>[  443.232699] drm_ioctl+0x228&#x2F;0x34c<br>[  443.232718] __arm64_sys_ioctl+0xa8&#x2F;0x110<br>[  443.232736] el0_svc_common.llvm.4263132210126967612+0xd8&#x2F;0x20c<br>[  443.232748] do_el0_svc+0x28&#x2F;0x98<br>[  443.232765] el0_svc+0x24&#x2F;0x38<br>[  443.232777] el0_sync_handler+0x88&#x2F;0xec<br>[  443.232793] el0_sync+0x1b8&#x2F;0x1c0</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">dp_display_request_irq</span><br><span class="line">	devm_request_irq(dp_display-&gt;drm_dev-&gt;dev, dp-&gt;irq,</span><br><span class="line">                     dp_display_irq_handler,</span><br><span class="line">                     IRQF_TRIGGER_HIGH, &quot;dp_display_isr&quot;, dp);</span><br><span class="line">		 </span><br><span class="line">irq-&gt;name = &quot;vsync_irq&quot;;</span><br><span class="line">irq-&gt;cb.func = dpu_encoder_phys_vid_underrun_irq;</span><br><span class="line">dpu_encoder_phys_vid_vblank_irq</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">static const struct dpu_encoder_virt_ops dpu_encoder_parent_ops = &#123;</span><br><span class="line">        .handle_vblank_virt = dpu_encoder_vblank_callback,</span><br><span class="line">        .handle_underrun_virt = dpu_encoder_underrun_callback,</span><br><span class="line">        .handle_frame_done = dpu_encoder_frame_done_callback,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">dpu_encoder_vblank_callback</span><br><span class="line">    dpu_crtc_vblank_callback</span><br><span class="line">		drm_crtc_handle_vblank</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-用户态"><a href="#2-用户态" class="headerlink" title="2.用户态"></a>2.用户态</h4><p><img src="C:\Users\rokid\AppData\Roaming\Typora\typora-user-images\image-20240321160541228.png" alt="image-20240321160541228"></p>
+<p><img src="C:\Users\rokid\AppData\Roaming\Typora\typora-user-images\image-20240321191611493.png" alt="image-20240321191611493"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">VSyncWorker::Routine</span><br><span class="line">	drmWaitVBlank</span><br><span class="line">		ret = ioctl(fd, DRM_IOCTL_WAIT_VBLANK, vbl);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><img src="C:\Users\rokid\AppData\Roaming\Typora\typora-user-images\image-20240322143446276.png" alt="image-20240322143446276"></p>
+<p>vsync-sf有边沿跳变 但是还是在等待；</p>
+<hr>
+<p>看下dsi-display.c代码</p>
+<h2 id="2-3-DisplayBase-PerformHwCommit-耗时长达1s"><a href="#2-3-DisplayBase-PerformHwCommit-耗时长达1s" class="headerlink" title="2.3 DisplayBase::PerformHwCommit::耗时长达1s"></a>2.3 DisplayBase::PerformHwCommit::耗时长达1s</h2><img src="C:\Users\rokid\AppData\Roaming\Typora\typora-user-images\image-20240325115224336.png" alt="image-20240325115224336" style="zoom:150%;" />
+
+
+
+<h3 id="1-HWC框架【CS架构】"><a href="#1-HWC框架【CS架构】" class="headerlink" title="1.HWC框架【CS架构】"></a>1.HWC框架【CS架构】</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/runafterhit/article/details/118884165">android多媒体框架介绍（四）显示图形系统之hwc叠加器_hwc layers-CSDN博客</a></p>
+<p>Android 8.0 及更高版本使用一个名为Composer HAL 的 HIDL 接口，用于在 HWC 和 SurfaceFlinger 之间binderized IPC通信。即将上层Androd和底层HAL分别采用两个不用的进程实现，最终调用到vender的具体实现hwc中，中间采用Binder进行通信。形成如下几个关键部分：<br><img src="https://img-blog.csdnimg.cn/20210720080023873.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3J1bmFmdGVyaGl0,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><strong>HWC2 Client</strong>在surfaceFlinger的service进程上下文中。<strong>HWC2 Server</strong>表示hwc的hal层服务端有独立的进程process【composer-servic】；</p>
+<p><img src="C:\Users\rokid\AppData\Roaming\Typora\typora-user-images\image-20240326142729911.png" alt="image-20240326142729911"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HIDL::IComposerClient::executeCommands_2_2::client</span><br><span class="line"></span><br><span class="line">/la_vendor/hardware/qcom/display/composer/QtiComposerClient.cpp</span><br><span class="line">HIDL::IComposerClient::executeCommands_2_2::server(QtiComposerClient)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>SurfaceFlinger传入HWC的过程，都会调用beginCommand,最终都会通过QtiComposerClient::CommandReader::parseCommonCmd来解析</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">QtiComposerClient::executeCommands_2_2</span><br><span class="line">	QtiComposerClient::CommandReader::parse</span><br><span class="line">		QtiComposerClient::CommandReader::parseCommonCmd</span><br><span class="line">			QtiComposerClient::CommandReader::parsePresentOrValidateDisplay</span><br><span class="line">				HWCDisplayBuiltIn::CommitOrPrepare::</span><br></pre></td></tr></table></figure>
+
+<p>如果没有Client合成的话，会尝试parsePresentOrValidateDisplay(PRESENT_OR_VALIDATE_DISPLAY)送显</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40405527/article/details/123395261">Android Qcom Display学习(四)_presentdisplay-CSDN博客</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">HWCDisplayBuiltIn::CommitOrPrepare::</span><br><span class="line">    HWCDisplay::CommitOrPrepare::</span><br><span class="line">        DisplayBase::CommitOrPrepare::</span><br><span class="line">            DisplayBase::<span class="built_in">SetUpCommit</span>(layer_stack)</span><br><span class="line">                DisplayBase::<span class="built_in">Commit</span>(display_comp_ctx_, &amp;disp_layer_stack_)</span><br><span class="line">                    DisplayBase::CommitLocked</span><br><span class="line">                        DisplayBase::PerformHwCommit</span><br><span class="line">                            Fence::Wait</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-函数调用"><a href="#2-函数调用" class="headerlink" title="2.函数调用"></a>2.函数调用</h3><p>PerformHwCommit -&gt; Fence::wait -&gt; SyncWait(Fence::Get(fence), 1000)</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">/la_vendor/hardware/qcom/display/sdm/libs/core/display_base.<span class="function">cpp</span></span><br><span class="line"><span class="function">DisplayError <span class="title">DisplayBase::PerformHwCommit</span><span class="params">(HWLayersInfo *hw_layers_info)</span> </span></span><br><span class="line"><span class="function">    </span></span><br><span class="line"><span class="function">1554    <span class="comment">// TODO(user): Workaround for messenger app flicker issue in CWB idle fallback,</span></span></span><br><span class="line"><span class="function">1555    <span class="comment">// to be removed when issue is fixed.</span></span></span><br><span class="line"><span class="function">1556    <span class="title">if</span> <span class="params">(cwb_fence_wait_ &amp;&amp; hw_layers_info-&gt;output_buffer &amp;&amp;</span></span></span><br><span class="line"><span class="params"><span class="function"><span class="number">1557</span>        (hw_layers_info-&gt;output_buffer-&gt;release_fence != <span class="literal">nullptr</span>))</span> </span>&#123;</span><br><span class="line"><span class="number">1558</span>      <span class="keyword">if</span> (Fence::<span class="built_in">Wait</span>(hw_layers_info-&gt;output_buffer-&gt;release_fence) != kErrorNone) &#123;</span><br><span class="line"><span class="number">1559</span>        <span class="built_in">DLOGW</span>(<span class="string">&quot;sync_wait error errno = %d, desc = %s&quot;</span>, errno, <span class="built_in">strerror</span>(errno));</span><br><span class="line"><span class="number">1560</span>      &#125;</span><br><span class="line"><span class="number">1561</span>    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/la_vendor/hardware/qcom/display/sdm/libs/utils/fence.cpp</span><br><span class="line"></span><br><span class="line"><span class="number">118</span>  <span class="function"><span class="type">int</span> <span class="title">Fence::Wait</span><span class="params">(<span class="type">const</span> shared_ptr&lt;Fence&gt; &amp;fence)</span> </span>&#123;</span><br><span class="line"><span class="number">119</span>    <span class="built_in">ASSERT_IF_NO_BUFFER_SYNC</span>(g_buffer_sync_handler_);</span><br><span class="line"><span class="number">120</span>  </span><br><span class="line"><span class="number">121</span>    <span class="keyword">return</span> g_buffer_sync_handler_-&gt;<span class="built_in">SyncWait</span>(Fence::<span class="built_in">Get</span>(fence), <span class="number">1000</span>);</span><br><span class="line"><span class="number">122</span>  &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\rokid\AppData\Roaming\Typora\typora-user-images\image-20240325144727986.png" alt="image-20240325144727986"></p>
+<h3 id="3-Wait入参"><a href="#3-Wait入参" class="headerlink" title="3.Wait入参"></a>3.Wait入参</h3><blockquote>
+<p>Fence::Wait(hw_layers_info-&gt;output_buffer-&gt;release_fence)</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DisplayError DisplayBase::SetUpCommit(LayerStack *layer_stack)</span><br><span class="line">	disp_layer_stack_.info.output_buffer = layer_stack-&gt;output_buffer;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DisplayBuiltIn::SetUpCommit</span><br><span class="line">	DisplayBase::SetUpCommit</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="C:\Users\rokid\AppData\Roaming\Typora\typora-user-images\image-20240325144808392.png" alt="image-20240325144808392"></p>
+<p>可以看到是在performHWcommit中执行了Fence::Wait，后者调用SyncWait(Fence::Get(fence), 1000)等待了1s，与trace中耗时匹配</p>
+<h1 id="3-解决方案"><a href="#3-解决方案" class="headerlink" title="3.解决方案"></a>3.解决方案</h1><p>注释Fence::wait代码段</p>
+<p><img src="C:\Users\rokid\AppData\Roaming\Typora\typora-user-images\image-20240326112910428.png" alt="image-20240326112910428"></p>
+<p>注：fence等待代码看注释是去解决messenger应用（facebook）闪烁问题，目前看来对station2无影响，暂时忽略</p>
+<h1 id="4-延伸学习"><a href="#4-延伸学习" class="headerlink" title="4.延伸学习"></a>4.延伸学习</h1><h2 id="4-1-Vsync"><a href="#4-1-Vsync" class="headerlink" title="4.1 Vsync"></a>4.1 Vsync</h2><h3 id="1-Vsync虚拟化"><a href="#1-Vsync虚拟化" class="headerlink" title="1.Vsync虚拟化"></a>1.Vsync虚拟化</h3><p><img src="https://pic1.zhimg.com/80/v2-b506717057826c9e593182544913b17e_720w.webp?source=2c26e567" alt="img"></p>
+<p>SurfaceFlinger中的DisplayVSync（Android S后改名为VsyncController）就是虚拟的VSync源，其需要两个参数来保证与硬件VSync的同步性，第一个是参考点，第二个就是周期。这些都可以开启硬件VSync同步解决。</p>
+<h3 id="2-Vsync同步"><a href="#2-Vsync同步" class="headerlink" title="2.Vsync同步"></a>2.Vsync同步</h3><p>VSync虚拟化的本质就是在软件层面模拟硬件VSync，既然是软件模拟，那么就会存在托盘，如果自己的托盘比较大，那么就需要开启硬件VSync同步来进行安排。</p>
+<p>首先是如何发现间隙比较大？答案是通过fence机制。SurfaceFlinger在每一帧交换HWC的时候，同时都会从HWC那里得到这一帧的PresentFence，它就是这一帧开始刷新到屏幕的信号的时候。</p>
+<p>那驱动什么时候开始刷新一帧至屏幕呢，答案是屏幕VSync来的时候。根据PresentFence的信号时间就可以知道真实的VSync时间。</p>
+<p><img src="D:\DingTalkAppData\DingTalk\216604157_v2\ImageFiles\1711080285888_72073935-8679-4e9e-85E7-3E8C95CD867E.png" alt="1711080285888_72073935-8679-4e9e-85E7-3E8C95CD867E"></p>
+<h3 id="3-Vsync分配"><a href="#3-Vsync分配" class="headerlink" title="3.Vsync分配"></a>3.Vsync分配</h3><p><img src="https://picx.zhimg.com/80/v2-9ac6437e04a24c407b4b578aea49b07b_720w.webp?source=2c26e567" alt="img"></p>
+<h2 id="4-2-Qcom-display"><a href="#4-2-Qcom-display" class="headerlink" title="4.2 Qcom display"></a>4.2 Qcom display</h2><h3 id="1-图显系统框架图"><a href="#1-图显系统框架图" class="headerlink" title="1.图显系统框架图"></a>1.图显系统框架图</h3><p><img src="https://img-blog.csdnimg.cn/c03d564c64374a0393762fd3b0a83fd3.png" alt="drm"></p>
+<p>libdrm:对底层定义在drm_ioctl.c 中各种IOCTL接口进行封装，向上层提供通用的API接口<br>GEM:Graphic Execution Manager，主要负责显示buffer的分配和释放，也是GPU唯一用到DRM的地方。<br>KMS:Kernel Mode Setting，负责显示buffer的切换，多图层的合成方式，显示位置。设置分辨率、刷新率等</p>
+<p>KMS和DRM两者都是通过libdrm来进行调用的，但两者是具有相对独立性的，DPU对应的KMS对应于系统侧的HWC Composer，其重点是在于送显，而GPU对应DRM则侧重应用侧相关的渲染绘制。</p>
+<h3 id="2-KMS流程"><a href="#2-KMS流程" class="headerlink" title="2.KMS流程"></a>2.KMS流程</h3><p><img src="https://img-blog.csdnimg.cn/f827da455ca14ce48788724e7a99765c.png" alt="在这里插入图片描述"></p>
+<h3 id="3-SurfaceFlinger传入HWC的过程"><a href="#3-SurfaceFlinger传入HWC的过程" class="headerlink" title="3.SurfaceFlinger传入HWC的过程"></a>3.SurfaceFlinger传入HWC的过程</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">HWCSession::PresentDisplay</span><br><span class="line">	HWCDisplayBuiltIn::Present</span><br><span class="line">		HWCDisplay::CommitLayerStack  <span class="comment">// DumpInputBuffers() 高通dump inputbuffer的地方</span></span><br><span class="line">			DisplayBuiltIn::Commit</span><br><span class="line">				DisplayBase::Commit</span><br><span class="line"></span><br><span class="line">	HWPeripheralDRM::Commit</span><br><span class="line">		HWDeviceDRM::AtomicCommit</span><br><span class="line">		    HWDeviceDRM::SetupAtomic <span class="comment">// fb id用于对应framebuffer</span></span><br><span class="line">			DRMAtomicReq::Commit</span><br><span class="line">				drmModeAtomicCommit</span><br><span class="line">					drm_atomic_commit</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-fence机制"><a href="#4-fence机制" class="headerlink" title="4.fence机制"></a>4.fence机制</h3><p>fence：android4.4开始引入的一种资源同步机制，主要用于处理跨硬件场景，如CPU、GPU、HWC之间的buffer资源同步。可以将fence理解为一种资源锁。</p>
+<p>举个例子，customer使用producer提供的buffer，使用完成后要还给producer生产，如果没有fence，通常是customer完全使用完成后开始归还转移buffer，拥有权&#x2F;使用权 一起给到producer，producer获取到后可以马上使用。</p>
+<p>从资源并发访问的原则上看其实customer使用完成后producer已经可以写了，在buffer转移这个过程实际上没有任何人在使用这个buffer。</p>
+<p>fence的目的就是customer可以在开始用甚至是收到buffer的时候 开始归还转移buffer，同时也转移这个buffer对应的fence，producer收到buffer后拿到拥有权但不一定能使用， 等到需要使用的时候通过wait fence来阻塞查看buffer是否被customer使用完，wait后拿到使用权开始写。</p>
+<p>理想的buffer轮转如下，保证buffer始终有人在使用。</p>
+<p><img src="https://img-blog.csdnimg.cn/20190414100532761.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3J1bmFmdGVyaGl0,size_16,color_FFFFFF,t_70" alt="img"></p>
+<h3 id="5-PLANE"><a href="#5-PLANE" class="headerlink" title="5.PLANE"></a>5.PLANE</h3><p>PLANE代表显示图层，每个 CRTC 需要定义一个 primary plane 以及可选的 overlay plane、cursor plane</p>
+<p>PLANE 存在的意义主要有两点：增强系统灵活性、提高系统性能<br>(1)对于背景和光标等变化不频繁的基本图显输出，可用通用 plane 来实现。而那些频繁变化则可由专用的 plane 来实现。<br>(2)plane 具备图像缩放、剪裁、多图层叠加等基本的图像处理功能，因此，可以让 GPU 来将更多的精力放在图形渲染上。</p>
+<h3 id="6-CRTC"><a href="#6-CRTC" class="headerlink" title="6.CRTC"></a>6.CRTC</h3><p>CRTC从drm_plane 接收RGB像素数据并将其混合到一起，传输给下级显示设备drm_encoder。<br>CRTC 模块存在的意义主要有以下三点：<br>(1)统一协调 FB、DRM、用户空间代码之间对图显输出的控制<br>(2)图显模式的配置权回收到 kernel 空间，避免用户空间代码直接控制图显控制器引起 kernel panic<br>(3)kernel 空间实现的图显输出暂停与恢复相关代码，可以方便的调用图显控制器的配置函数</p>
+<h3 id="7-ENCODER"><a href="#7-ENCODER" class="headerlink" title="7.ENCODER"></a>7.ENCODER</h3><p>DRM Encoder 和 Connector 模块由图显外设抽象而来，Encoder 属于控制器部分，将内存的像素编码转换为显示器所需要的信号例如VGA、MIPI；Virutal Encoder管理一个逻辑显示，包含一个或多个物理encoder，每个物理encoder对应一个INTF硬件模块。</p>
+<h3 id="8-CONNECTOR"><a href="#8-CONNECTOR" class="headerlink" title="8.CONNECTOR"></a>8.CONNECTOR</h3><p>Connector 包含外设 PHY 或者显示器参数，代表连接的显示设备连接状态，支持的视频模式等。</p>
+<h1 id="5-疑问点"><a href="#5-疑问点" class="headerlink" title="5.疑问点"></a>5.疑问点</h1><h4 id="pending-kickoff-cnt"><a href="#pending-kickoff-cnt" class="headerlink" title="pending_kickoff_cnt"></a>pending_kickoff_cnt</h4><p>wait_timeout中atomic_cnt是pending_kickoff_cnt</p>
+<p>打印值，为啥不为0</p>
+<p><img src="C:\Users\rokid\AppData\Roaming\Typora\typora-user-images\image-20240321222749624.png" alt="image-20240321222749624"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">static inline int sde_encoder_phys_inc_pending(struct sde_encoder_phys *phys)</span><br><span class="line">&#123;</span><br><span class="line">        SDE_ERROR(&quot;zyr sde_encoder_phys_inc_pending &amp;phys_enc-&gt;pending_kickoff_cnt 1:%d\n&quot;,atomic_read(&amp;phys-&gt;pending_kickoff_cnt));</span><br><span class="line">        return atomic_inc_return(&amp;phys-&gt;pending_kickoff_cnt);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里面加的1</p>
+<p><img src="C:\Users\rokid\AppData\Roaming\Typora\typora-user-images\image-20240321223749901.png" alt="image-20240321223749901"></p>
+<p>得看下sde_encoder_phys_vid_vblank_irq这个函数在做啥</p>
+<p>1.399889-415972为啥有个_sde_crtc_vblank_enable</p>
+<p>2.415972-425203 irq2到irq1为啥有10ms</p>
+<h1 id="6-参考链接"><a href="#6-参考链接" class="headerlink" title="6.参考链接"></a>6.参考链接</h1><p>1.<a target="_blank" rel="noopener" href="https://blog.csdn.net/fengchaochao123/article/details/135262216">DRM驱动（九）之drm_vblank_drmwaitvblank-CSDN博客</a></p>
+<p>2.<a target="_blank" rel="noopener" href="https://blog.csdn.net/dshj2007/article/details/106225175">vsync从中断到用户态的经历_hmid vsync中断-CSDN博客</a></p>
+<p>3.<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/616697833">帧同步依赖技术理解：安卓图形系统及Vsync - 知乎 (zhihu.com)</a></p>
+<p>4.<a target="_blank" rel="noopener" href="https://blog.csdn.net/runafterhit/article/details/89293013">简图记录-android fence机制-CSDN博客</a></p>
+<p>5.<a target="_blank" rel="noopener" href="https://blog.csdn.net/jinzhuojun/article/details/39698317">Android中的GraphicBuffer同步机制-Fence_android graphicbuffer-CSDN博客</a></p>
+<p>6.<a target="_blank" rel="noopener" href="https://blog.csdn.net/runafterhit/article/details/118884165">android多媒体框架介绍（四）显示图形系统之hwc叠加器_hwc layers-CSDN博客</a></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

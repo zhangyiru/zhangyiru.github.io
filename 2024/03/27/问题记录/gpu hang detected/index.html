@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        gpu hang detected - zddzdd
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+		<img src="/img/wanwan.jpg" class="js-avatar show"/>
+	</div>
+        <div class="name">
+            <i>Xayahion</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E6%89%93%E5%8D%B0"><span class="toc-text">日志打印</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-text">代码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#adreno-hang-int-callback%E5%AE%9A%E4%B9%89%E4%BD%8D%E7%BD%AE"><span class="toc-text">adreno_hang_int_callback定义位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#adreno-irq-handler%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8adreno-hang-int-callback"><span class="toc-text">adreno_irq_handler中断处理函数调用adreno_hang_int_callback</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#adreno-fault-header%E6%89%93%E5%8D%B0gpu-fault-ctx"><span class="toc-text">adreno_fault_header打印gpu fault ctx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8A%E5%B1%82%E8%B0%83%E7%94%A8do-header-and-snapshot"><span class="toc-text">上层调用do_header_and_snapshot</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dmesg%E6%89%93%E5%8D%B0%E5%AE%8C%E5%86%8D%E6%89%93%E5%BF%AB%E7%85%A7"><span class="toc-text">dmesg打印完再打快照</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        gpu hang detected
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2024-03-27 15:12:51</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#problem" title="problem">problem</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>gpu hang detected</p>
+<h3 id="日志打印"><a href="#日志打印" class="headerlink" title="日志打印"></a>日志打印</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[16799.633153] kgsl kgsl-3d0: MISC: GPU hang detected</span><br><span class="line">[16799.638132] kgsl kgsl-3d0: maku.bilibilihd[22918]: gpu fault ctx 36 ctx_type GL ts 157287 status 00EF0CF5 rb 13e0/1510 ib1 0000000500C90000/0000 ib2 0000000500CA04F8/0000</span><br><span class="line">[16799.653814] kgsl kgsl-3d0: maku.bilibilihd[22918]: gpu fault rb 2 rb sw r/w 13e0/1644</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><p>LINUX&#x2F;android&#x2F;kernel&#x2F;msm-4.19&#x2F;drivers&#x2F;gpu&#x2F;msm&#x2F;adreno.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * adreno_hang_int_callback() - Isr for fatal interrupts that hang GPU</span></span><br><span class="line"><span class="comment"> * @adreno_dev: Pointer to device</span></span><br><span class="line"><span class="comment"> * @bit: Interrupt bit</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">adreno_hang_int_callback</span><span class="params">(<span class="keyword">struct</span> adreno_device *adreno_dev, <span class="type">int</span> bit)</span></span><br><span class="line">&#123;</span><br><span class="line">        dev_crit_ratelimited(KGSL_DEVICE(adreno_dev)-&gt;dev,</span><br><span class="line">                                <span class="string">&quot;MISC: GPU hang detected\n&quot;</span>);</span><br><span class="line">        adreno_irqctrl(adreno_dev, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Trigger a fault in the dispatcher - this will effect a restart */</span></span><br><span class="line">        adreno_set_gpu_fault(adreno_dev, ADRENO_HARD_FAULT);</span><br><span class="line">        adreno_dispatcher_schedule(KGSL_DEVICE(adreno_dev));</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="adreno-hang-int-callback定义位置"><a href="#adreno-hang-int-callback定义位置" class="headerlink" title="adreno_hang_int_callback定义位置"></a>adreno_hang_int_callback定义位置</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">adreno_irq_funcs</span> <span class="title">a6xx_irq_funcs</span>[32] =</span> &#123;</span><br><span class="line">	...</span><br><span class="line">	<span class="comment">/* 23 - MISC_HANG_DETECT */</span></span><br><span class="line">    ADRENO_IRQ_CALLBACK(adreno_hang_int_callback),</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ADRENO_IRQ_CALLBACK(_c) &#123; .func = _c &#125;</span></span><br><span class="line">-&gt; .func = adreno_hang_int_callback</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="keyword">struct</span> adreno_irq a6xx_irq = &#123;</span><br><span class="line">        .funcs = a6xx_irq_funcs, <span class="comment">//called</span></span><br><span class="line">        .mask = A6XX_INT_MASK,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">adreno_gpudev</span> <span class="title">adreno_a6xx_gpudev</span> =</span> &#123;</span><br><span class="line">        .reg_offsets = &amp;a6xx_reg_offsets,</span><br><span class="line">        .start = a6xx_start,</span><br><span class="line">        .snapshot = a6xx_snapshot,</span><br><span class="line">        .irq = &amp;a6xx_irq, <span class="comment">//called</span></span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="adreno-irq-handler中断处理函数调用adreno-hang-int-callback"><a href="#adreno-irq-handler中断处理函数调用adreno-hang-int-callback" class="headerlink" title="adreno_irq_handler中断处理函数调用adreno_hang_int_callback"></a>adreno_irq_handler中断处理函数调用adreno_hang_int_callback</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">#LINUX/android/kernel/msm<span class="number">-4.19</span>/drivers/gpu/msm/adreno.c</span><br><span class="line"><span class="type">static</span> <span class="type">irqreturn_t</span> <span class="title function_">adreno_irq_handler</span><span class="params">(<span class="keyword">struct</span> kgsl_device *device)</span></span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    adreno_readreg(adreno_dev, ADRENO_REG_RBBM_INT_0_STATUS, &amp;status);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Clear all the interrupt bits but ADRENO_INT_RBBM_AHB_ERROR. Because</span></span><br><span class="line"><span class="comment">         * even if we clear it here, it will stay high until it is cleared</span></span><br><span class="line"><span class="comment">         * in its respective handler. Otherwise, the interrupt handler will</span></span><br><span class="line"><span class="comment">         * fire again.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    int_bit = ADRENO_INT_BIT(adreno_dev, ADRENO_INT_RBBM_AHB_ERROR);</span><br><span class="line">    adreno_writereg(adreno_dev, ADRENO_REG_RBBM_INT_CLEAR_CMD,</span><br><span class="line">                                status &amp; ~int_bit);</span><br><span class="line">	<span class="comment">/* Loop through all set interrupts and call respective handlers */</span></span><br><span class="line">    <span class="keyword">for</span> (tmp = status; tmp != <span class="number">0</span>;) &#123;</span><br><span class="line">        	<span class="comment">//1.tmp从低位往左边数第24位非0</span></span><br><span class="line">        	<span class="comment">//#define A3XX_INT_MISC_HANG_DETECT 24 (a3xx_reg.h)</span></span><br><span class="line">        	<span class="comment">//2.i为23会回调adreno_hang_int_callback</span></span><br><span class="line">            i = fls(tmp) - <span class="number">1</span>; </span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (irq_params-&gt;funcs[i].func != <span class="literal">NULL</span>) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (irq_params-&gt;mask &amp; BIT(i))</span><br><span class="line">                            irq_params-&gt;funcs[i].func(adreno_dev, i);</span><br><span class="line">            &#125; <span class="keyword">else</span></span><br><span class="line">                    dev_crit_ratelimited(device-&gt;dev,</span><br><span class="line">                                            <span class="string">&quot;Unhandled interrupt bit %x\n&quot;</span>,</span><br><span class="line">                                            i);</span><br><span class="line"></span><br><span class="line">            ret = IRQ_HANDLED;</span><br><span class="line"></span><br><span class="line">            tmp &amp;= ~BIT(i);</span><br><span class="line">    &#125;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">kgsl_device_platform_probe</span><br><span class="line">	<span class="title function_">kgsl_request_irq</span><span class="params">(device-&gt;pdev, device-&gt;pwrctrl.irq_name, kgsl_irq_handler, device)</span></span><br><span class="line">		device-&gt;ftbl-&gt;irq_handler</span><br><span class="line">			adreno_irq_handler</span><br><span class="line"></span><br><span class="line">kgsl_request_irq</span><br><span class="line">	<span class="comment">//申请中断</span></span><br><span class="line">    <span class="comment">//devm_request_irq和request_irq区别在于前者是申请的内核“managed”资源，不需要自己手动释放，会自动回收资源，而后者需要手动调用free_irq来释放中断资源</span></span><br><span class="line">	<span class="title function_">devm_request_irq</span><span class="params">(&amp;pdev-&gt;dev, num, handler, IRQF_TRIGGER_HIGH, name, data)</span>;           </span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="adreno-fault-header打印gpu-fault-ctx"><a href="#adreno-fault-header打印gpu-fault-ctx" class="headerlink" title="adreno_fault_header打印gpu fault ctx"></a>adreno_fault_header打印gpu fault ctx</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">16799.633153</span>] kgsl kgsl<span class="number">-3</span>d0: MISC: GPU hang detected</span><br><span class="line">[<span class="number">16799.638132</span>] kgsl kgsl<span class="number">-3</span>d0: maku.bilibilihd[<span class="number">22918</span>]: gpu fault ctx <span class="number">36</span> ctx_type GL ts <span class="number">157287</span> status <span class="number">00</span>EF0CF5 rb <span class="number">13e1510</span> ib1 <span class="number">0000000500</span>C90000/<span class="number">0000</span> ib2 <span class="number">0000000500</span>CA04F8/<span class="number">0000</span></span><br><span class="line">[<span class="number">16799.653814</span>] kgsl kgsl<span class="number">-3</span>d0: maku.bilibilihd[<span class="number">22918</span>]: gpu fault rb <span class="number">2</span> rb sw r/w <span class="number">13e0</span>/<span class="number">1644</span></span><br><span class="line">[<span class="number">16799.661893</span>] kgsl kgsl<span class="number">-3</span>d0: GMU snapshot started at <span class="number">0xcce4dc5fd</span> ticks</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">adreno_fault_header</span><span class="params">(<span class="keyword">struct</span> kgsl_device *device,</span></span><br><span class="line"><span class="params">                <span class="keyword">struct</span> adreno_ringbuffer *rb, <span class="keyword">struct</span> kgsl_drawobj_cmd *cmdobj,</span></span><br><span class="line"><span class="params">                <span class="type">int</span> fault)</span></span><br><span class="line">&#123;</span><br><span class="line">	...</span><br><span class="line">	trace_adreno_gpu_fault(drawobj-&gt;context-&gt;id,</span><br><span class="line">        drawobj-&gt;timestamp,</span><br><span class="line">        status, rptr, wptr, ib1base, ib1sz,</span><br><span class="line">        ib2base, ib2sz, drawctxt-&gt;rb-&gt;id);</span><br><span class="line"></span><br><span class="line">    pr_fault(device, drawobj,</span><br><span class="line">            <span class="string">&quot;%s fault ctx %d ctx_type %s ts %d status %8.8X rb %4.4x/%4.4x ib1 %16.16llX/%4.4x ib2 %16.16llX/%4.4x\n&quot;</span>,</span><br><span class="line">            type, drawobj-&gt;context-&gt;id,</span><br><span class="line">            get_api_type_str(drawctxt-&gt;type),</span><br><span class="line">            drawobj-&gt;timestamp, status,</span><br><span class="line">            rptr, wptr, ib1base, ib1sz, ib2base, ib2sz);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="上层调用do-header-and-snapshot"><a href="#上层调用do-header-and-snapshot" class="headerlink" title="上层调用do_header_and_snapshot"></a>上层调用do_header_and_snapshot</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">do_header_and_snapshot</span><span class="params">(<span class="keyword">struct</span> kgsl_device *device, <span class="type">int</span> fault,</span></span><br><span class="line"><span class="params">                <span class="keyword">struct</span> adreno_ringbuffer *rb, <span class="keyword">struct</span> kgsl_drawobj_cmd *cmdobj)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">kgsl_drawobj</span> *<span class="title">drawobj</span> =</span> DRAWOBJ(cmdobj);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Always dump the snapshot on a non-drawobj failure */</span></span><br><span class="line">        <span class="keyword">if</span> (cmdobj == <span class="literal">NULL</span>) &#123;</span><br><span class="line">                adreno_fault_header(device, rb, <span class="literal">NULL</span>, fault); <span class="comment">//called</span></span><br><span class="line">                kgsl_device_snapshot(device, <span class="literal">NULL</span>, fault &amp; ADRENO_GMU_FAULT);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Skip everything if the PMDUMP flag is set */</span></span><br><span class="line">        <span class="keyword">if</span> (test_bit(KGSL_FT_SKIP_PMDUMP, &amp;cmdobj-&gt;fault_policy))</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Print the fault header */</span></span><br><span class="line">        adreno_fault_header(device, rb, cmdobj, fault); <span class="comment">//called</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!(drawobj-&gt;context-&gt;flags &amp; KGSL_CONTEXT_NO_SNAPSHOT))</span><br><span class="line">                kgsl_device_snapshot(device, drawobj-&gt;context,</span><br><span class="line">                                        fault &amp; ADRENO_GMU_FAULT);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">adreno_dispatcher_work</span><br><span class="line">    <span class="comment">//dispatcher_do_fault() returns 0 if no faults occurred. If that is the case, then clean up preemption and try to schedule more work</span></span><br><span class="line">	dispatcher_do_fault</span><br><span class="line">    	<span class="comment">//if (!(fault &amp; ADRENO_GMU_FAULT_SKIP_SNAPSHOT))</span></span><br><span class="line">		do_header_and_snapshot</span><br><span class="line">    		<span class="comment">//dmesg打印</span></span><br><span class="line">			adreno_fault_header</span><br><span class="line">    		<span class="comment">//kgsl_worker_thr PID290</span></span><br><span class="line">			kgsl_device_snapshot</span><br><span class="line">    			<span class="comment">//打快照</span></span><br><span class="line">    			adreno_snapshot</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="dmesg打印完再打快照"><a href="#dmesg打印完再打快照" class="headerlink" title="dmesg打印完再打快照"></a>dmesg打印完再打快照</h4><p>kgsl_worker_thr内核线程正好在循环里面的usleep_range</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">crash&gt; </span><span class="language-bash">ps | grep UN</span></span><br><span class="line">      290       2   7  ffffffc4133a5880  UN   0.0        0        0  [kgsl_worker_thr]</span><br><span class="line">      540       2   0  ffffffc412223b00  UN   0.0        0        0  [hdcp_2x]</span><br><span class="line">      541       2   1  ffffffc4122249c0  UN   0.0        0        0  [dp_hdcp2p2]</span><br><span class="line"><span class="meta prompt_">crash&gt; </span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash">crash&gt;</span> </span><br><span class="line"><span class="meta prompt_">crash&gt; </span><span class="language-bash">bt 290</span></span><br><span class="line">PID: 290      TASK: ffffffc4133a5880  CPU: 7    COMMAND: &quot;kgsl_worker_thr&quot;</span><br><span class="line"><span class="meta prompt_"> #</span><span class="language-bash">0 [ffffff80146839d0] __switch_to at ffffffacb348ac54</span></span><br><span class="line"><span class="meta prompt_"> #</span><span class="language-bash">1 [ffffff8014683a20] __schedule at ffffffacb48d33c8</span></span><br><span class="line"><span class="meta prompt_"> #</span><span class="language-bash">2 [ffffff8014683a80] schedule at ffffffacb48d368c</span></span><br><span class="line"><span class="meta prompt_"> #</span><span class="language-bash">3 [ffffff8014683b00] schedule_hrtimeout_range_clock at ffffffacb48d8160</span></span><br><span class="line"><span class="meta prompt_"> #</span><span class="language-bash">4 [ffffff8014683b30] schedule_hrtimeout_range at ffffffacb48d81f4</span></span><br><span class="line"><span class="meta prompt_"> #</span><span class="language-bash">5 [ffffff8014683b50] usleep_range at ffffffacb48d7e90</span></span><br><span class="line"><span class="meta prompt_"> #</span><span class="language-bash">6 [ffffff8014683bb0] a6xx_snapshot at ffffffacb3c07544</span></span><br><span class="line"><span class="meta prompt_"> #</span><span class="language-bash">7 [ffffff8014683c50] adreno_snapshot at ffffffacb3beff18</span></span><br><span class="line"><span class="meta prompt_"> #</span><span class="language-bash">8 [ffffff8014683ce0] kgsl_device_snapshot at ffffffacb3bd6a80</span></span><br><span class="line"><span class="meta prompt_"> #</span><span class="language-bash">9 [ffffff8014683da0] adreno_dispatcher_work at ffffffacb3becc40</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">10 [ffffff8014683e10] kthread_worker_fn at ffffffacb34ebdd8</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">11 [ffffff8014683e60] kthread at ffffffacb34ece6c</span></span><br></pre></td></tr></table></figure>
+
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>
